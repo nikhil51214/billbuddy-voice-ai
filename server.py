@@ -83,7 +83,7 @@ class BillBuddyHandler(http.server.SimpleHTTPRequestHandler):
         # 1. Call Sarvam-105B Chat Completion
         chat_url = "https://api.sarvam.ai/v1/chat/completions"
         chat_payload = {
-            "model": "sarvam-105b",
+            "model": "sarvam-105b-conversations",
             "messages": [
                 {
                     "role": "system",
@@ -104,7 +104,7 @@ class BillBuddyHandler(http.server.SimpleHTTPRequestHandler):
                 }
             ],
             "temperature": 0.3,
-            "max_tokens": 1000
+            "max_tokens": 500
         }
 
         req = urllib.request.Request(
@@ -140,10 +140,10 @@ class BillBuddyHandler(http.server.SimpleHTTPRequestHandler):
         lang_config = LANGUAGE_CONFIG.get(language, LANGUAGE_CONFIG["English"])
         tts_url = "https://api.sarvam.ai/text-to-speech"
         tts_payload = {
-            "inputs": [answer[:500]],
-            "target_language_code": lang_config["code"],
-            "speaker": lang_config["speaker"],
-            "model": "bulbul:v4-flash"
+            "text": answer[:500],
+            "model": "bulbul:v3",
+            "language_code": lang_config["code"],
+            "speaker": lang_config["speaker"]
         }
 
         try:

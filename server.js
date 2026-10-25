@@ -39,9 +39,9 @@ app.post("/api/ask", async (req, res) => {
       });
     }
 
-    // 1. Call Sarvam-105B Chat Completion
+    // 1. Call Sarvam-105B-conversations Chat Completion
     const chatPayload = {
-      model: "sarvam-105b",
+      model: "sarvam-105b-conversations",
       messages: [
         {
           role: "system",
@@ -60,7 +60,7 @@ Rules:
         }
       ],
       temperature: 0.3,
-      max_tokens: 1000
+      max_tokens: 500
     };
 
     const chatResponse = await fetch("https://api.sarvam.ai/v1/chat/completions", {
@@ -96,10 +96,10 @@ Rules:
           "api-subscription-key": apiKey
         },
         body: JSON.stringify({
-          inputs: [answer.slice(0, 500)],
-          target_language_code: langConfig.code,
+          text: answer.slice(0, 500),
+          language_code: langConfig.code,
           speaker: langConfig.speaker,
-          model: "bulbul:v4-flash"
+          model: "bulbul:v3"
         })
       });
 

@@ -60,7 +60,7 @@ Rules:
         }
       ],
       temperature: 0.3,
-      max_tokens: 350
+      max_tokens: 1000
     };
 
     const chatResponse = await fetch("https://api.sarvam.ai/v1/chat/completions", {
@@ -81,7 +81,8 @@ Rules:
     }
 
     const chatData = await chatResponse.json();
-    const answer = chatData.choices?.[0]?.message?.content || "Sorry, I could not generate an answer.";
+    const msg = chatData.choices?.[0]?.message;
+    const answer = msg?.content || msg?.reasoning_content || "Sorry, I could not generate an answer.";
 
     // 2. Call Sarvam Bulbul TTS for authentic voice output
     let audioBase64 = null;

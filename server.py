@@ -104,7 +104,7 @@ class BillBuddyHandler(http.server.SimpleHTTPRequestHandler):
                 }
             ],
             "temperature": 0.3,
-            "max_tokens": 350
+            "max_tokens": 1000
         }
 
         req = urllib.request.Request(
@@ -119,10 +119,14 @@ class BillBuddyHandler(http.server.SimpleHTTPRequestHandler):
         )
 
         try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=40) as resp:
                 chat_res = json.loads(resp.read().decode("utf-8"))
                 choices = chat_res.get("choices", [])
-                answer = choices[0].get("message", {}).get("content", "") if choices else ""
+                if choices:
+                    msg = choices[0].get("message", {})
+                    answer = msg.get("content") or msg.get("reasoning_content") or "Sorry, I could not generate an answer."
+                else:
+                    answer = "No response from Sarvam AI."
         except urllib.error.HTTPError as e:
             err_content = e.read().decode("utf-8")
             self.send_json_response(e.code, {"error": f"Sarvam Chat API error ({e.code}): {err_content}"})

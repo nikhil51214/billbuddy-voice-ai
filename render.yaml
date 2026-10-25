@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: billbuddy-voice-ai
+    env: python
+    buildCommand: "echo 'No build step required'"
+    startCommand: "python3 server.py"
+    plan: free
+    envVars:
+      - key: SARVAM_API_KEY
+        sync: false
+      - key: PORT
+        value: 10000

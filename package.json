@@ -1,0 +1,25 @@
+{
+  "name": "billbuddy-voice-ai",
+  "version": "1.0.0",
+  "description": "BillBuddy AI — Electricity bill reader and multilingual voice assistant powered by Sarvam AI",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "py": "python3 server.py"
+  },
+  "keywords": [
+    "sarvam-ai",
+    "electricity-bill",
+    "voice-assistant",
+    "indic",
+    "hackathon"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

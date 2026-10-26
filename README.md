@@ -38,7 +38,7 @@ npm start
 ```
 
 ### 3. Open the App
-Visit [http://localhost:3000](http://localhost:3000) in Chrome.
+Visit [http://localhost:3000](https://billbuddy-voice-ai.onrender.com) in Chrome.
 Click **⚡ Load Sample Bill**, select **Hindi**, and ask:
 > *"Mera bill ₹1,735 kyu aaya hai?"*
 
